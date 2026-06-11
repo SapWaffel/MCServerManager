@@ -4,7 +4,9 @@ from src.util.manager.config import Config
 
 logger = logging.getLogger(__name__)
 
+
 class Port:
+    ACTIVE_PORTS = []
 
     def __init__(self):
         self.config_manager = Config()
