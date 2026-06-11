@@ -1,0 +1,12 @@
+{
+    "version": "1.0.0 SNAPSHOT",
+    "mongodb": {
+        "uri": "mongodb://192.168.211.181:27017/"
+    },
+    "ports": {
+        "default": [25567, 25586],
+        "dev": [35501, 35505]
+    },
+    "server_directory": "/home/sap/minecraft/servers",
+    "dev_extension": "/_dev"
+}
