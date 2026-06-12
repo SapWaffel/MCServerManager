@@ -106,21 +106,17 @@ class Database:
             return False
 
     @staticmethod
-    def create(identifier: dict, data: dict) -> bool:
-        #usage: Database.create({"uuid": "some-uuid"}, {"name": "PlayerName", "score": 100})
+    def create(data: dict) -> bool:
+        #usage: Database.create({"name": "PlayerName", "score": 100})
         try:
             manager = Database()
             db = manager.client.get_db("service")
             collection = db["minecraft"]
 
-            if collection.find_one(identifier):
-                logger.warning(f"Document with identifier {identifier} already exists.")
-                return False
-
-            collection.insert_one({**identifier, **data})
-            return True
+            result = collection.insert_one(data)
+            return result.acknowledged
         except Exception as e:
-            logger.error(f"Error creating document in MongoDB: {e}")
+            logger.error(f"Error inserting document into MongoDB: {e}")
             return False
 
     @staticmethod
