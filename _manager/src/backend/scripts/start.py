@@ -102,7 +102,12 @@ def update_server_properties(uuid: str, server_data: dict, server_path: str, por
 
 def run_server(java_cmd: list, server_path: str, uuid: str):
     try:
-        process = subprocess.Popen(java_cmd, cwd=server_path)
+        process = subprocess.Popen(
+            java_cmd,
+            cwd=server_path,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
         print(f"Started server process with PID: {process.pid}")
         Database.set({"uuid": uuid}, {"runtime.pid": process.pid, "runtime.status": "starting"}) 
     except subprocess.CalledProcessError as e:
