@@ -18,7 +18,7 @@ def main(uuid: str, port: int = None):
     # Get Database
     server_data = Database.get({"uuid": uuid})
     if not server_data:
-        return {"error": f"No server found with UUID: {uuid}"}
+        return {"success": False, "error": f"No server found with UUID: {uuid}"}
 
     # Get Flags & Resources
     dev_server = server_data.get("metadata", {}).get("dev_server", False)
@@ -34,12 +34,12 @@ def main(uuid: str, port: int = None):
             allocated_port = port
             port_manager.ACTIVE_PORTS.append(allocated_port)
         else:
-            return {"error": f"Port {port} is already in use."}
+            return {"success": False, "error": f"Port {port} is already in use."}
     else:    
         allocated_port = port_manager.allocate(server_type="default" if not dev_server else "dev")
 
     if not allocated_port:
-        return {"error": "No available ports to allocate."}
+        return {"success": False, "error": "No available ports to allocate."}
 
     Database.set({"uuid": uuid}, {"resources.port": allocated_port})
 
