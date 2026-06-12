@@ -1,1 +1,4 @@
 pymongo
+requests
+fastapi
+uvicorn
