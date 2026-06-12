@@ -8,5 +8,6 @@
         "dev": [35501, 35505]
     },
     "server_directory": "/home/sap/minecraft/servers",
-    "dev_extension": "/_dev"
+    "dev_extension": "/_dev",
+    "template_extension": "/.template/server/"
 }
